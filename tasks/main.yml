@@ -1,0 +1,66 @@
+- become: yes
+  block:
+
+  ################################################################################
+  # Initial tasks. Are runned only initial server setup.
+  # Need manual tag "init" (use "all,init")
+  ################################################################################
+
+  # - import_tasks: init.yml
+  #   when: allow_init is defined
+  #   tags: never,init
+
+  ################################################################################
+  # Deploy phase
+  ################################################################################
+
+  - import_tasks: deploy.yml
+    tags: deploy
+
+  ################################################################################
+  # Update phase. Never runs by default. 
+  # Need manual tag "update"
+  ################################################################################
+
+  # - import_tasks: update.yml
+  #   when: allow_update is defined
+  #   tags: never,update
+
+  ################################################################################
+  # Config application
+  ################################################################################
+
+  # - import_tasks: config.yml
+  #   tags: config
+
+  ################################################################################
+  # Systemd configuration.
+  # Leave empty, if application doesn't have daemons
+  ################################################################################
+
+  # - import_tasks: systemd.yml
+  #   tags: systemd
+
+  ################################################################################
+  # Configure firewall
+  # Leave empty, if application doesn't have special firewall requirements
+  ##############################################################################
+
+  # - import_tasks: firewall.yml
+  #   tags: firewall
+
+  ################################################################################
+  # Remove application. Never runs by default. 
+  # Use tag "remove" when run playbook
+  ##############################################################################
+
+  # - import_tasks: remove.yml
+  #   when: allow_remove is defined
+  #   tags: never,remove
+
+  ##############################################################################
+  # Flush all handlers, anyway
+  ##############################################################################
+
+  always:
+  - meta: flush_handlers

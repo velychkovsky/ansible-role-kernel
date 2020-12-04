@@ -1,0 +1,13 @@
+################################################################################
+# Install Linux kernel packages
+################################################################################
+
+- name: deploy | kernel packages
+  register: packages
+  yum:
+    state: present
+    name: kernel-{{ linux_kernel_version.centos7 }}
+  notify: 
+    - update grub config RedHat
+    - reboot server
+    - show time elapsed

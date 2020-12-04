@@ -1,0 +1,20 @@
+- name: update grub config RedHat
+  become: yes
+  shell: grub2-mkconfig -o /boot/grub2/grub.cfg
+
+- name: update grub config Debian
+  become: yes
+  shell: grub-mkconfig -o /boot/grub/grub.cfg
+
+- name: reboot server
+  become: yes
+  register: reboot
+  when: (kernel_allow_reboot | bool) == True
+  reboot:
+    reboot_timeout: 300
+
+- name: show time elapsed
+  become: yes
+  when: reboot.skipped is not defined and reboot.changed == True
+  debug:
+    msg: "Time elapsed for reboot: {{ reboot.elapsed }} seconds"

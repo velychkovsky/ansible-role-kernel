@@ -1,0 +1,7 @@
+kernel_allow_reboot: no
+
+linux_kernel_version:
+  centos7: 4.19.84
+  debian10: 4.19.0-8
+  ubuntu1804: 4.15.0-99
+  ubuntu2004: 5.4.0-29

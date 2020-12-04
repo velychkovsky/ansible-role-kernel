@@ -1,0 +1,34 @@
+################################################################################
+# Deploy xz-utils
+# Don't know why...
+################################################################################
+
+- name: deploy | Deploy xz-utils
+  apt:
+    state: present
+    name: xz-utils
+
+################################################################################
+# Deploy Linux kernel packages
+################################################################################
+
+- name: deploy | Deploy kernel packages
+  register: apt
+  apt:
+    state: present
+    name: 
+      - linux-image-{{ linux_kernel_version.debian10 }}-amd64
+      - linux-image-{{ linux_kernel_version.debian10 }}-cloud-amd64
+  notify: 
+    - update grub config Debian
+    - reboot server
+    - show time elapsed
+
+################################################################################
+# Make sure packages are excluded from autoupdate
+################################################################################
+
+- name: deploy | Hold upgrades of kernel packages
+  dpkg_selections:
+    selection: hold
+    name: kernel-{{ linux_kernel_version.debian10 }}

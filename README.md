@@ -31,8 +31,7 @@ https://nexus.ahback.com/repository/public/icons/ansible-shared-roles-platforms/
 
 ```yaml
 - name: linux/kernel
-  src: git+git@git.ahback.com:ansible-roles/linux/kernel.git
-  version: master
+  src: https://nexus.ahback.com/repository/public/ansible-roles/linux/kernel-release-v3.0.tar.gz
 ```
 
 Переходим в папку с проектом и запускаем установку роли:

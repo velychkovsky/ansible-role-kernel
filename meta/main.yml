@@ -1,6 +1,6 @@
 ---
 galaxy_info:
   author: DevOps Team
-  description: Firewall Persistent Services
-  company: AdvancedHosting
+  description: Setup kernel
+  company: Private
   min_ansible_version: 2.0
